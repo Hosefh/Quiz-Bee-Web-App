@@ -1,100 +1,89 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import QuizModal from "./components/quiz.modal"; // Adjust the path according to your folder structure
+import Logo from "../../public/assets/bicto-logo.png"; // Path from public folder
+import PGBhLogo from "../../public/assets/logo.png";
+import Capitol from "../../public/assets/CAPITOL.jpg"; // Path from public folder
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [showQuizModal, setShowQuizModal] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  return (
+    <div className="relative grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <nav className="absolute top-0 left-0 right-0 z-20 flex justify-between items-center p-6 bg-transparent">
+        <div className="flex items-center gap-4">
+          <Image src={PGBhLogo} alt="PGBh Logo" width={60} height={60} />
+          <span className="text-white text-lg sm:text-xl lg:text-2xl font-semibold">
+            PGBh Quiz Bee
+          </span>
+        </div>
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
+            className="text-white text-base hover:text-blue-300"
+            onClick={() => setShowAboutModal(true)}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            About
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </nav>
+
+      <div className="absolute inset-0">
+        {/* Background image with gradient overlay */}
+        <Image
+          src={Capitol}
+          alt="Capitol Building"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-600 via-blue-400 to-transparent opacity-80 z-0" />
+      </div>
+
+      {/* Wave SVG at the bottom */}
+			<div className="absolute bottom-0 left-0 right-0 z-0">
+				<svg
+					viewBox="0 0 1440 320"
+					xmlns="http://www.w3.org/2000/svg"
+					className="w-full h-auto"
+				>
+					<path
+						fill="#ffffff" /* Bottom part color */
+						fillOpacity="0.8" /* Adjust opacity */
+						d="M0,192L60,192C120,192,240,192,360,181.3C480,171,600,149,720,138.7C840,128,960,128,1080,149.3C1200,171,1320,213,1380,234.7L1440,256L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"
+					/>
+				</svg>
+			</div>
+
+      <div className="relative z-10 flex flex-col gap-8 row-start-2 justify-center items-center">
+        {/* Hero Text */}
+        <h1 className="text-white text-6xl font-bold text-center sm:text-left">
+          Join the Ultimate Quiz Challenge!
+        </h1>
+
+        {/* Start Quiz Button */}
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <button
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-500 text-white gap-2 hover:bg-blue-600 text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
+            onClick={() => setShowQuizModal(true)}
+          >
+            Start Quiz
+          </button>
+        </div>
+
+        {showQuizModal && <QuizModal setShowModal={setShowQuizModal} />}
+        {showAboutModal && <QuizModal setShowModal={setShowAboutModal} isAbout />}
+      </div>
+
+      {/* Footer */}
+      <footer className="absolute bottom-0 left-0 right-0 z-10 flex gap-8 items-center justify-center bg-transparent py-4">
+        <Image src={Logo} alt="BICTO Logo" width={50} height={50} />
+        <span className="text-gray-500 text-sm sm:text-base">
+          Developed and Maintained by BICTO
+        </span>
       </footer>
     </div>
   );
